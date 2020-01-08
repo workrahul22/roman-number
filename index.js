@@ -8,18 +8,40 @@ let RomanMapping = {
 	'M':1000
 }
 
+let order = {
+	'M':1,
+	'D':2,
+	'C':3,
+	'L':4,
+	'X':5,
+	'V':6,
+	'I':7
+}
+
+let reverseRomanMapping = {
+	'1':'I',
+	'5':'V',
+	'10':'X',
+	'50':'L',
+	'100':'C',
+	'500':'D',
+	'1000':'M'
+}
+
 var orderCheck = (num) => {
 	let lastValue = -Infinity;
 	if(num.length === 1)
 		return false;
 	for(var i=1;i<num.length;i++){
+		if(order[num[i]] + 1 === order[num[i+1]])
+			continue;
 		if(RomanMapping[num[i]] < RomanMapping[num[i+1]])
 			return true;
 	}
 	return false;
 }
 
-var toDecimal = (num) =>{
+var toDecimal = (num) => {
 	if(typeof num !== 'string')
 		return new Error("Input must be a string");
 	// Validate the roman string
@@ -34,8 +56,14 @@ var toDecimal = (num) =>{
 		return new Error("Roman Number is Invalid");
 	// Convert roman number to decimal
 	let number = 0;
-	for(var i=num.length-1;i>=0;i--){
-		number += RomanMapping[num[i]];
+	for(var i=0;i<num.length;i++){
+		if(order[num[i]] + 1 === order[num[i+1]]){
+			number += RomanMapping[num[i+1]];
+			number -= RomanMapping[num[i]];
+			i++;
+		}
+		else
+			number += RomanMapping[num[i]];
 	}
 	return number;
 }
@@ -83,6 +111,22 @@ var toRoman = (num) => {
 		console.log(num);
 	}
 	return number.join('');
+}
+
+var add = (...args) => {
+	console.log("Yet to work on");
+}
+
+var sub = (num1, num2) => {
+	console.log("Yet to work on");
+}
+
+var mul = (num1, num2) => {
+	console.log("Yet to work on");
+}
+
+var div = (num1,num2) => {
+	console.log("yet to work on");
 }
 
 console.log(toRoman(29));
