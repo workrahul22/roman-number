@@ -68,49 +68,19 @@ var toDecimal = (num) => {
 	return number;
 }
 
-var toRoman = (num) => {
-	if(typeof num !== 'number')
-		return new Error("Must be a number");
-	if(num === 0)
-		return new Error("There is nothing defined for 0 in roman number system");
-	let number = [];
-	while(num>0){
-		if(num / 1000 >= 1){
-			number.push('M');
-			num -= 1000;
+var toRoman = (number) => {
+	let roman = "";
+	let num = [1,4,5,9,10,40,50,90,100,400,500,900,1000];
+	let sym = ['I','IV','V','IX','X','XL','L','XC','C','CD','D','CM','M'];
+	let i = 12;
+	while(number > 0) {
+		let div = number / num[i];
+		number = number % num[i];
+		while(div-=1){
+			roman.concat(sym[i]);
 		}
-		else if(num / 500 >= 1){
-			number.push('D');
-			num -= 500;
-		}
-		else if(num / 100 >= 1){
-			number.push('C');
-			num -= 100;
-		}
-		else if(num / 50 >= 1){
-			number.push('L');
-			num -= 50;
-		}
-		else if(num / 10 >= 1){
-			number.push('X');
-			num -= 10;
-		}
-		else if(num / 5 >= 1){
-			number.push('V');
-			num -= 5;
-		}
-		else{
-			if(num === 1){
-				number.push('I');
-				num = 0;
-			}else{
-				number.push('I');
-				num -= 1;
-			}
-		}
-		console.log(num);
+		i-=1;
 	}
-	return number.join('');
 }
 
 var add = (...args) => {
