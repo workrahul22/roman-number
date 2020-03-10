@@ -2,7 +2,7 @@
   "name": "deroman",
   "version": "1.0.0",
   "description": "Roman Number Conversion Module",
-  "main": "index.js",
+  "main": "Roman.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
